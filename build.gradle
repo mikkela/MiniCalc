@@ -1,0 +1,31 @@
+group 'com.mikadocs'
+version '1.0-SNAPSHOT'
+
+apply plugin: 'java'
+apply plugin: 'antlr'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    antlr 'org.antlr:antlr4:4.7.1'
+    compile "org.antlr:antlr4-runtime:4.7.1"
+}
+
+generateGrammarSource {
+    maxHeapSize = "64m"
+
+    // Keep a copy of generated sources
+    doLast {
+        println "Copying generated grammar lexer/parser files to main directory."
+        copy {
+            from "${buildDir}/generated-src/antlr/main"
+            into "generated-src/main/java"
+        }
+    }
+}
+
+clean.doLast {
+    file('generated-src').deleteDir()
+}
