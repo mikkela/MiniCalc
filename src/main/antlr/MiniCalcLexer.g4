@@ -1,9 +1,5 @@
 lexer grammar MiniCalcLexer;
 
-@header {
-package com.mikadocs.minicalc;
-}
-
 channels { WHITESPACE }
 
 // Whitespace
